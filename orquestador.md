@@ -1,5 +1,5 @@
 ## Descripción
-En este tutorial se aprenderá a crear un servidor NodeJS con Express.
+En este tutorial se aprenderá a crear un orquestador que reciba y procese mensajes de Whatsapp utilizando la API con el Sandbox de 360Dialog.
 
 ## Creación del servidor
 1. Crearemos el servidor de Node siguiendo los pasos del tutorial "servidorNode.md"
