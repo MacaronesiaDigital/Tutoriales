@@ -12,8 +12,10 @@ app.post("/orchestrator", async function (req, res) {
 ~~~
 3. Podemos probar que funciona correctamente haciendo una llamada POST con Postman y confirmando que nos devuelve el mensaje de "OK".
 4. Ahora ya podemos empezar a configurar las APIs de mensajería que vamos a utilizar (Whatsapp, Telegram, etc). Para este ejemplo utilizaremos la API de Whatsapp que haciendo uso de el entorno de Sandbox de 360Dialog. Lo primero que haremos será solicitar una API Key a 360dialog. Para ello debemos escribirle al contacto de sandbox (+49 30 609859535) por whatsapp el mensaje "START". Devolverá un mensaje con la API Key que sólo podrá ser utilizada para enviar mensajes al número de telefóno con el que solicitaste la API Key.
-5. Lo siguiente será indicarle a 360dialog cual es el endpoint del orquestador. 360dialog solo responde a peticiones por https así que será necesario crear un tunel con ngrok para realizar las pruebas. Ejecutaremos el comando `ngrok http puerto` en donde "puerto" será el puerto en donde tenemos corriendo el servidor (EJ: 5000). Ngrok entonces nos proporcionará un enlace https que podemos utlizar indefinidamente hasta que se termine de ejecutar el servidor ngrok.
-6. Ahora que tenemos una url de nuestro orquestador válida, el siguiente paso será indicárselo a 360dialog. Podemos usar Postman para ello. Aquí debemos indicarle que será una petición POST a la siguiente url: https://waba-sandbox.360dialog.io/v1/configs/webhook . Como Header debemos indicarle la API que nos proporcionó 360Dialog 
+![image](https://user-images.githubusercontent.com/78566105/217484200-745b01e3-e471-4a43-a3fb-2a8113589491.png)
+6. Lo siguiente será indicarle a 360dialog cual es el endpoint del orquestador. 360dialog solo responde a peticiones por https así que será necesario crear un tunel con ngrok para realizar las pruebas. Ejecutaremos el comando `ngrok http puerto` en donde "puerto" será el puerto en donde tenemos corriendo el servidor (EJ: 5000). Ngrok entonces nos proporcionará un enlace https que podemos utlizar indefinidamente hasta que se termine de ejecutar el servidor ngrok.
+![image](https://user-images.githubusercontent.com/78566105/217484355-558d4482-6759-4fa7-bedc-976e98b239ec.png)
+8. Ahora que tenemos una url de nuestro orquestador válida, el siguiente paso será indicárselo a 360dialog. Podemos usar Postman para ello. Aquí debemos indicarle que será una petición POST a la siguiente url: https://waba-sandbox.360dialog.io/v1/configs/webhook . Como Header debemos indicarle la API que nos proporcionó 360Dialog 
 image.png
 Y en el body los siguientes parámetros.
 ~~~
@@ -27,7 +29,7 @@ Y en el body los siguientes parámetros.
 })
 ~~~
 En donde como se puede observar, se le indica el endpoint https del orquestador en "url" y el apikey. Si la petición se ha realizado con éxito, deberé mostrarse un mensaje como el siguiente:
-image.png
+![image](https://user-images.githubusercontent.com/78566105/217484507-95d90ce3-8dab-4200-a1b2-373787ac1bc4.png)
 7. Ahora deberemos indicarle al orquestador cómo recibir mensajes vía Whatsapp. Los mensajes entrarán en el orquestador en formato json, configurado en nuestro enpoint como "req". Podemos extraer de aquí distintos tipos de datos. En este ejemplo veremos cómo se obtner el cuerpo de un mensaje de Whatsapp, el tipo de mensaje y el emisor:
 ~~~
 let message = req.body.messages[0].message
